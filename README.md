@@ -1,6 +1,8 @@
-# EcoScore 🌍
+# EcoScore - Carbon Footprint Calculator 🌍
 
-A carbon footprint calculator I built while exploring sustainability tech.
+> **[🚀 Try it Live!](https://eco-score-carbon-calculator.vercel.app/)**
+
+A web app I built to help people calculate their personal carbon footprint and get practical tips to reduce it.
 
 ---
 

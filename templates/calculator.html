@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Calculator - EcoScore</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    {% include 'components/navbar.html' %}
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-header">
+                <h1>🌍 Calculate Your Carbon Footprint</h1>
+                <p>Answer a few questions about your lifestyle to get your sustainability score</p>
+            </div>
+
+            <div class="calculator-container">
+                <!-- Progress Bar -->
+                <div class="progress-bar">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-circle">1</div>
+                        <div class="step-label">Transport</div>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-circle">2</div>
+                        <div class="step-label">Energy</div>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-circle">3</div>
+                        <div class="step-label">Diet</div>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-circle">4</div>
+                        <div class="step-label">Travel</div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form id="carbonForm">
+                    
+                    <!-- Step 1: Transport -->
+                    <div class="form-step active" data-step="1">
+                        <h2>🚗 Daily Transportation</h2>
+                        
+                        <div class="form-group">
+                            <label for="transport_mode">Primary mode of transport:</label>
+                            <select id="transport_mode" name="transport_mode" required>
+                                <option value="">Select...</option>
+                                <option value="walk">🚶 Walk</option>
+                                <option value="bicycle">🚴 Bicycle</option>
+                                <option value="motorcycle">🏍️ Motorcycle</option>
+                                <option value="car_petrol">🚗 Car (Petrol)</option>
+                                <option value="car_diesel">🚙 Car (Diesel)</option>
+                                <option value="bus">🚌 Bus</option>
+                                <option value="train">🚄 Train</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transport_distance">Daily travel distance (km):</label>
+                            <input type="number" id="transport_distance" name="transport_distance" 
+                                   min="0" max="500" value="20" required>
+                            <small>Average commute distance per day</small>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                                Next →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Energy -->
+                    <div class="form-step" data-step="2">
+                        <h2>⚡ Energy Consumption</h2>
+                        
+                        <div class="form-group">
+                            <label for="electricity_units">Monthly electricity usage (units/kWh):</label>
+                            <input type="number" id="electricity_units" name="electricity_units" 
+                                   min="0" max="2000" value="300" required>
+                            <small>Check your electricity bill (average is 200-400 units/month)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="electricity_source">Main electricity source:</label>
+                            <select id="electricity_source" name="electricity_source" required>
+                                <option value="">Select...</option>
+                                <option value="coal">🏭 Coal (Grid)</option>
+                                <option value="natural_gas">🔥 Natural Gas</option>
+                                <option value="solar">☀️ Solar</option>
+                                <option value="wind">💨 Wind</option>
+                                <option value="hydro">💧 Hydro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep(1)">
+                                ← Back
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+                                Next →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Diet -->
+                    <div class="form-step" data-step="3">
+                        <h2>🍽️ Diet & Food</h2>
+                        
+                        <div class="form-group">
+                            <label for="diet_type">Diet type:</label>
+                            <select id="diet_type" name="diet_type" required>
+                                <option value="">Select...</option>
+                                <option value="vegan">🌱 Vegan (No animal products)</option>
+                                <option value="vegetarian">🥗 Vegetarian (No meat)</option>
+                                <option value="low_meat">🍗 Low Meat (1-2 times/week)</option>
+                                <option value="medium_meat">🥩 Medium Meat (3-5 times/week)</option>
+                                <option value="heavy_meat">🍖 Heavy Meat (Daily)</option>
+                            </select>
+                        </div>
+
+                        <div class="info-box">
+                            <strong>💡 Did you know?</strong>
+                            <p>Food production accounts for 26% of global greenhouse gas emissions. 
+                               Reducing meat consumption is one of the most impactful changes you can make!</p>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
+                                ← Back
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+                                Next →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Flights -->
+                    <div class="form-step" data-step="4">
+                        <h2>✈️ Air Travel</h2>
+                        
+                        <div class="form-group">
+                            <label for="domestic_flights">Domestic flights per year:</label>
+                            <input type="number" id="domestic_flights" name="domestic_flights" 
+                                   min="0" max="50" value="2" required>
+                            <small>Within your country</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="international_flights">International flights per year:</label>
+                            <input type="number" id="international_flights" name="international_flights" 
+                                   min="0" max="20" value="0" required>
+                            <small>Outside your country</small>
+                        </div>
+
+                        <div class="info-box">
+                            <strong>✈️ Flight Impact:</strong>
+                            <p>A single round-trip flight from Delhi to London produces about 1.6 tons of CO₂ 
+                               — that's nearly the entire annual footprint of someone in India!</p>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
+                                ← Back
+                            </button>
+                            <button type="submit" class="btn btn-success" id="calculateBtn">
+                                🧮 Calculate My Score
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <!-- Loading Spinner (hidden by default) -->
+                <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Calculating your carbon footprint...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'components/footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- Modal Overlay -->
+<div id="shareModal" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3>🔗 Share Your Results</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Share your sustainability journey with friends!</p>
+            
+            <div class="share-text" id="shareText">
+                I scored <strong id="modalScore">---</strong>/1000 on my EcoScore! 
+                My carbon footprint is <strong id="modalCO2">---</strong> tons/year. 
+                Join me in fighting climate change! 🌍
+            </div>
+
+            <div class="share-buttons">
+                <button class="share-btn twitter" onclick="shareToTwitter()">
+                    🐦 Share on Twitter
+                </button>
+                <button class="share-btn whatsapp" onclick="shareToWhatsApp()">
+                    💬 Share on WhatsApp
+                </button>
+                <button class="share-btn copy" onclick="copyShareText()">
+                    📋 Copy Text
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoScore - Carbon Footprint Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </div>
+
+    <!-- Navbar -->
+    {% include 'components/navbar.html' %}
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">
+                    Know Your Impact. 
+                    <span class="highlight">Reduce Your Footprint.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Join thousands making data-driven decisions for a greener future. 
+                    Calculate your carbon emissions, get your sustainability score, and track your progress.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/calculator" class="btn btn-primary">
+                        <i class="fas fa-calculator"></i> Calculate My Footprint
+                    </a>
+                    <a href="#how-it-works" class="btn btn-secondary">
+                        <i class="fas fa-book"></i> Learn More
+                    </a>
+                </div>
+
+                <!-- Live Impact Counter -->
+                <div class="impact-counter">
+                    <div class="counter-badge">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <div class="counter-number" data-target="1247">0</div>
+                            <div class="counter-label">Active Users</div>
+                        </div>
+                    </div>
+                    <div class="counter-badge">
+                        <i class="fas fa-leaf"></i>
+                        <div>
+                            <div class="counter-number" data-target="8456">0</div>
+                            <div class="counter-label">Tons CO₂ Tracked</div>
+                        </div>
+                    </div>
+                    <div class="counter-badge">
+                        <i class="fas fa-tree"></i>
+                        <div>
+                            <div class="counter-number" data-target="3921">0</div>
+                            <div class="counter-label">Trees Equivalent</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card scroll-reveal">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📝</div>
+                    <h3>Input Your Data</h3>
+                    <p>Tell us about your daily transport, electricity usage, diet, and travel habits in our easy 4-step form.</p>
+                </div>
+                <div class="step-card scroll-reveal">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🧮</div>
+                    <h3>AI Calculates</h3>
+                    <p>Our algorithm calculates your carbon footprint based on verified global emission factors and scientific data.</p>
+                </div>
+                <div class="step-card scroll-reveal">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">📊</div>
+                    <h3>Get Your Score</h3>
+                    <p>Receive your sustainability score (0-1000) with detailed breakdown, interactive graphs, and comparisons.</p>
+                </div>
+                <div class="step-card scroll-reveal">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">💡</div>
+                    <h3>Take Action</h3>
+                    <p>Get personalized, actionable recommendations. Track progress, earn badges, and join weekly challenges!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Why It Matters</h2>
+            <div class="about-content scroll-reveal">
+                <div class="about-text">
+                    <p>
+                        🌡️ Climate change is the defining challenge of our time. To limit global warming to 1.5°C, 
+                        the average person needs to reduce their carbon footprint to <strong>2 tons CO₂ per year by 2030</strong>.
+                    </p>
+                    <p>
+                        📊 EcoScore helps you understand your environmental impact through science-backed calculations 
+                        and provides actionable steps to reduce your emissions. Our AI-powered recommendations are 
+                        personalized to your lifestyle, making sustainability accessible to everyone.
+                    </p>
+                    
+                    <div class="why-us-grid">
+                        <div class="why-card">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>Science-Based</strong>
+                                <p>Using verified IPCC emission factors</p>
+                            </div>
+                        </div>
+                        <div class="why-card">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>Privacy First</strong>
+                                <p>Your data stays on your device</p>
+                            </div>
+                        </div>
+                        <div class="why-card">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>100% Free</strong>
+                                <p>No hidden costs, ever</p>
+                            </div>
+                        </div>
+                        <div class="why-card">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>Gamified</strong>
+                                <p>Earn badges and compete</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-box scroll-reveal">
+                    <h3>Ready to make a difference?</h3>
+                    <p>Small changes in daily habits can make a big difference!</p>
+                    <a href="/calculator" class="btn btn-primary btn-lg">
+                        <i class="fas fa-rocket"></i> Start Your Journey
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'components/footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

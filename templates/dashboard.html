@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your EcoScore - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Plotly for charts -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    {% include 'components/navbar.html' %}
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-section">
+        <div class="container">
+            
+            <!-- Score Card (Main Result) -->
+            <div class="score-card-main" id="scoreCardMain">
+                <div class="score-display">
+                    <div class="score-emoji" id="scoreEmoji">🌍</div>
+                    <div class="score-number" id="scoreNumber">---</div>
+                    <div class="score-max">/ 1000</div>
+                </div>
+                <div class="score-level" id="scoreLevel">Calculating...</div>
+                <div class="score-message" id="scoreMessage">Please wait while we analyze your carbon footprint</div>
+            </div>
+
+            <!-- Total CO2 Banner -->
+            <div class="co2-banner">
+                <div class="co2-item">
+                    <div class="co2-label">Your Annual Footprint</div>
+                    <div class="co2-value" id="totalCO2">--- tons</div>
+                </div>
+                <div class="co2-item">
+                    <div class="co2-label">India Average</div>
+                    <div class="co2-value comparison">1.9 tons</div>
+                </div>
+                <div class="co2-item">
+                    <div class="co2-label">World Average</div>
+                    <div class="co2-value comparison">4.0 tons</div>
+                </div>
+                <div class="co2-item">
+                    <div class="co2-label">Paris Target</div>
+                    <div class="co2-value target">2.0 tons</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <!-- Breakdown Table -->
+                <div class="chart-card">
+                    <h3>📊 Emissions Breakdown</h3>
+                    <table class="breakdown-table" id="breakdownTable">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>CO₂ (tons/year)</th>
+                                <th>Percentage</th>
+                                <th>Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🚗 Transport</td>
+                                <td id="transportCO2">---</td>
+                                <td id="transportPercent">---%</td>
+                                <td><div class="impact-bar" id="transportBar"></div></td>
+                            </tr>
+                            <tr>
+                                <td>⚡ Electricity</td>
+                                <td id="electricityCO2">---</td>
+                                <td id="electricityPercent">---%</td>
+                                <td><div class="impact-bar" id="electricityBar"></div></td>
+                            </tr>
+                            <tr>
+                                <td>🍽️ Diet</td>
+                                <td id="dietCO2">---</td>
+                                <td id="dietPercent">---%</td>
+                                <td><div class="impact-bar" id="dietBar"></div></td>
+                            </tr>
+                            <tr>
+                                <td>✈️ Flights</td>
+                                <td id="flightsCO2">---</td>
+                                <td id="flightsPercent">---%</td>
+                                <td><div class="impact-bar" id="flightsBar"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Bar Chart -->
+                <div class="chart-card">
+                    <h3>📈 Emissions by Category</h3>
+                    <div id="barChart"></div>
+                </div>
+            </div>
+
+            <!-- Comparison Chart -->
+            <div class="chart-card-full">
+                <h3>🌍 How You Compare</h3>
+                <div id="comparisonChart"></div>
+            </div>
+
+            <!-- Recommendations Section -->
+            <div class="recommendations-section">
+                <h2>💡 Personalized Recommendations</h2>
+                <p class="recommendations-subtitle">Based on your carbon footprint, here's how you can reduce your impact:</p>
+                
+                <div id="recommendationsGrid" class="recommendations-grid">
+                    <!-- Recommendations will be loaded here by JavaScript -->
+                    <div class="loading-recommendations">
+                        <div class="spinner-small"></div>
+                        <p>Loading personalized tips...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="dashboard-actions">
+                <button class="btn btn-primary" onclick="downloadReport()">
+                    📄 Download PDF Report
+                </button>
+                <button class="btn btn-secondary" onclick="shareResults()">
+                    🔗 Share Results
+                </button>
+                <button class="btn btn-outline" onclick="window.location.href='/calculator'">
+                    🔄 Recalculate
+                </button>
+            </div>
+
+            <!-- Gamification - Badges -->
+            <div class="badges-section">
+                <h3>🏆 Your Achievements</h3>
+                <div class="badges-grid" id="badgesGrid">
+                    <!-- Badges will be added by JavaScript -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modal for sharing -->
+    {% include 'components/modal.html' %}
+
+    <!-- Footer -->
+    {% include 'components/footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Load results when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDashboardData();
+        });
+    </script>
+</body>
+</html>

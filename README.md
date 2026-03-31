@@ -55,7 +55,7 @@ The idea is simple — you answer some questions about how you travel, how much 
 
 First, grab the code:
 
-    git clone https://github.com/barisha-ui/ecoscore-carbon-calculator.git
+    git clone https://github.com/barishavm29-ui/ecoscore-carbon-calculator.git
     cd ecoscore-carbon-calculator
 
 Setup environment (I used conda, but venv works too):
@@ -158,6 +158,3 @@ I'm currently working on building my profile for sustainability management progr
 
 If you have feedback or find bugs, feel free to open an issue!
 
----
-
-If you found this useful, a star would be cool ⭐

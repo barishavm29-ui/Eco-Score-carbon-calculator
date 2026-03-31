@@ -158,6 +158,3 @@ I'm currently working on building my profile for sustainability management progr
 
 If you have feedback or find bugs, feel free to open an issue!
 
----
-
-If you found this useful, a star would be cool ⭐
